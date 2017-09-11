@@ -2,5 +2,3 @@
 
 User-agent: *
 Crawl-delay: 10
-
-Sitemap: /sitemap.xml

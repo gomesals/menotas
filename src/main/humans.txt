@@ -1,12 +1,11 @@
 /* TEAM */
     Alexandre Gomes de Lima Silva
     Site: http://silvalexandre.com/
-    Twitter: @lexandregomes
     Location: São Sebastião, SP, Brazil
 
 /* SITE */
-    Last update: 2017/MM/DD
+    Last update: 2017/09/11
     Language: Portuguese
-    Components: Bootstrap, Pug, Grunt
+    Components: Pug, Grunt, Postcss
     Doctype: HTML5
     IDE: Sublime
