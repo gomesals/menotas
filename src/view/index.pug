@@ -16,7 +16,7 @@ html(lang="pt-br")
 						h2(v-if="note.title") {{note.title}}
 						p(v-if="note.content") {{note.content}}
 						.action
-							button.delete(title="Remove this note") Remove
+							button.delete(v-on:click="deleteNote(note)" title="Remove this note") Remove
 							button.edit(title="Edit this note") Edit
 			section#editor
 				div editor
