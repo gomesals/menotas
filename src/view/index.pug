@@ -8,7 +8,7 @@ html(lang="pt-br")
 		header
 			h1 MeNotas
 		main(role="main")
-			aside#notes
+			aside#notes(v-cloak)
 				.search
 					input.input(type="search" v-model="search" placeholder="Search notes")
 				ul
@@ -19,7 +19,13 @@ html(lang="pt-br")
 							button.delete(v-on:click="deleteNote(note)" title="Remove this note") Remove
 							button.edit(title="Edit this note") Edit
 			section#editor
-				div editor
+				.title
+					input.input(type="text" v-model="title" placeholder="Title")
+				.content
+					textarea.input(v-model="content" placeholder="Content")
+				.action
+					span(v-if="saved") Note saved...
+					button(v-on:click="save" title="Save note") Save
 		script(src="https://unpkg.com/vue")
 		script(src="//mynotes-silvalexandre.c9users.io:8082/livereload.js")
 		script(src="js/app.js" defer)

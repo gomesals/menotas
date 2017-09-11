@@ -83,5 +83,28 @@ main {
 	}
 	section {
 		lost-column: 3/5;
+		@mixin card;
+		.title {
+			margin-bottom: 1em;
+		}
+		.content {
+			margin-bottom: 1em;
+			textarea {
+				min-height: 60vh;
+				resize: none;
+			}
+		}
+		.action {
+			text-align: right;
+			span {
+				display: inline-block;
+				color: $green;
+				margin-right: .5em;
+			}
+			button {
+				@mixin button-accent 1,
+				true;
+			}
+		}
 	}
 }
