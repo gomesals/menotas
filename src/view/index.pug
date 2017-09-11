@@ -18,7 +18,7 @@ html(lang="pt-br")
 						p(v-if="note.content") {{note.content}}
 						.action
 							button.delete(v-on:click="deleteNote(note)" title="Remove this note") Remove
-							button.edit(title="Edit this note") Edit
+							button.edit(v-on:click="editNote(note)" title="Edit this note") Edit
 			section#editor
 				.title
 					input.input(type="text" v-model="title" placeholder="Title")

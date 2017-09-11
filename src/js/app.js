@@ -3,14 +3,14 @@
 	"use strict";
 	window.Event = new Vue();
 
-	function updateStorage(notes) {
+	function updateNotes(notes) {
 		localStorage.setItem('notes', JSON.stringify(notes));
 	}
 
 	function addItem(note) {
 		let notes = getNotes();
 		notes = notes.concat(note);
-		updateStorage(notes);
+		updateNotes(notes);
 	}
 
 	function getNotes() {
@@ -19,6 +19,12 @@
 			return notes;
 		}
 		return [];
+	}
+
+	function updateItem(note, index) {
+		const notes = getNotes();
+		notes[index] = note;
+		updateNotes(notes);
 	}
 	new Vue({
 		el: '#notes',
@@ -41,10 +47,17 @@
 		},
 		methods: {
 			deleteNote: function(note) {
-				const index = this.notes.indexOf(note);
+				const index = this.getIndex(note);
 				this.notes.splice(index, 1);
-				updateStorage(this.notes);
+				updateNotes(this.notes);
 			},
+			editNote: function(note) {
+				const index = this.getIndex(note);
+				Event.$emit('edit', note, index);
+			},
+			getIndex: function(note) {
+				return this.notes.indexOf(note);
+			}
 		}
 	});
 	new Vue({
@@ -53,19 +66,39 @@
 			title: '',
 			content: '',
 			saved: false,
+			isNew: true,
+			index: null,
+		},
+		created() {
+			Event.$on('edit', (note, index) => {
+				this.title = note.title;
+				this.content = note.content;
+				this.isNew = false;
+				this.index = index;
+			});
 		},
 		methods: {
 			save: function() {
 				if (this.title === '' && this.content === '') {
 					return false;
 				}
-				addItem({
-					title: this.title,
-					content: this.content
-				});
+				if (this.isNew) {
+					addItem({
+						title: this.title,
+						content: this.content
+					});
+				}
+				else {
+					updateItem({
+						title: this.title,
+						content: this.content
+					}, this.index);
+				}
+				this.isNew = true;
 				this.saved = true;
 				this.title = '';
 				this.content = '';
+				this.index = null;
 				setTimeout(() => {
 					this.saved = false;
 				}, 3500);
