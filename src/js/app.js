@@ -1,29 +1,41 @@
-/*global Vue,localStorage*/
+/*global Vue,localStorage,Event*/
 (function() {
 	"use strict";
+	window.Event = new Vue();
 
 	function updateStorage(notes) {
 		localStorage.setItem('notes', JSON.stringify(notes));
 	}
 
 	function addItem(note) {
-		let notes = JSON.parse(localStorage.getItem('notes'));
+		let notes = getNotes();
 		notes = notes.concat(note);
 		updateStorage(notes);
 	}
-	const notes = new Vue({
+
+	function getNotes() {
+		const notes = JSON.parse(localStorage.getItem('notes'));
+		if (notes) {
+			return notes;
+		}
+		return [];
+	}
+	new Vue({
 		el: '#notes',
 		data: {
 			search: '',
 			notes: [],
 		},
 		created() {
-			this.notes = JSON.parse(localStorage.getItem('notes'));
+			this.notes = getNotes();
+			Event.$on('saved', () => {
+				this.notes = getNotes();
+			});
 		},
 		computed: {
 			filteredNotes() {
 				return this.notes.filter(item => {
-					return (item.title.toLowerCase().indexOf(this.search.toLowerCase()) > -1) || (item.content.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+					return (item.title.toLowerCase().indexOf(this.search.toLowerCase()) > -1) || (item.content.toLowerCase().indexOf(this.search.toLowerCase()) > -1);
 				});
 			},
 		},
@@ -35,7 +47,7 @@
 			},
 		}
 	});
-	const editor = new Vue({
+	new Vue({
 		el: '#editor',
 		data: {
 			title: '',
@@ -57,7 +69,8 @@
 				setTimeout(() => {
 					this.saved = false;
 				}, 3500);
+				Event.$emit('saved');
 			}
 		}
-	})
+	});
 })();

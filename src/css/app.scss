@@ -27,6 +27,9 @@ main {
 				background-color: #fff;
 				padding: 1em;
 				border-bottom: 1px solid $gray;
+				&:last-child{
+					border-bottom: none;
+				}
 				&:hover {
 					h2 {
 						font-weight: 500;
