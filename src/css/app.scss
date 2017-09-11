@@ -129,3 +129,15 @@ main {
 		}
 	}
 }
+
+@media(--xs) {
+	main {
+		aside,
+		section {
+			lost-column: 1/1;
+		}
+		aside{
+			margin-bottom: 2em;
+		}
+	}
+}
