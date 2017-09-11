@@ -7,6 +7,8 @@ html(lang="pt-br")
 	body
 		header
 			h1 MeNotas
+			div by&nbsp;
+				a(href="http://silvalexandre.com" title="Alexandre Silva") silvalexandre
 		main(role="main")
 			aside#notes(v-cloak)
 				.search
@@ -19,7 +21,7 @@ html(lang="pt-br")
 						.action
 							button.delete(v-on:click="deleteNote(note)" title="Remove this note") Remove
 							button.edit(v-on:click="editNote(note)" title="Edit this note") Edit
-			section#editor
+			section#editor(v-cloak)
 				.title
 					input.input(type="text" v-model="title" placeholder="Title")
 				.content
