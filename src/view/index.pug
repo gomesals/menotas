@@ -1,0 +1,25 @@
+doctype
+html(lang="pt-br")
+	head
+		include default/header.pug
+		link(rel="stylesheet" href="css/app.css" media="all")
+		title MeNotas
+	body
+		header
+			h1 MeNotas
+		main(role="main")
+			aside#notes
+				.search
+					input.input(type="search" v-model="search" placeholder="Search notes")
+				ul
+					li(v-for="note in filteredNotes")
+						h2(v-if="note.title") {{note.title}}
+						p(v-if="note.content") {{note.content}}
+						.action
+							button.delete(title="Remove this note") Remove
+							button.edit(title="Edit this note") Edit
+			section#editor
+				div editor
+		script(src="https://unpkg.com/vue")
+		script(src="//mynotes-silvalexandre.c9users.io:8082/livereload.js")
+		script(src="js/app.js" defer)
