@@ -1,6 +1,6 @@
 {
 	"name": "menotas",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"description": "Simple app to store notes using Vue and localStorage API",
 	"main": "index.js",
 	"scripts": {
